@@ -30,8 +30,8 @@ export const Grid = ({ layout, setLayout }) => {
       className='layout'
       compactType={null}
       layouts={{ lg: layout }}
-      breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-      cols={{ lg: numOfCols ? numOfCols : 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+      breakpoints={{ lg: 1200 }}
+      cols={{ lg: numOfCols ? numOfCols : 12 }}
       rowHeight={100}
       ref={gridRef}
       onLayoutChange={(layout) => {
@@ -46,6 +46,6 @@ export const Grid = ({ layout, setLayout }) => {
 }
 
 Grid.propTypes = {
-  layout: PropTypes.string,
+  layout: PropTypes.array,
   setLayout: PropTypes.func.isRequired
 }
