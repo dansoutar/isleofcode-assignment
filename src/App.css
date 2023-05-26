@@ -1,0 +1,49 @@
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+}
+
+main {
+  padding: 2rem;
+  padding-top: 0;
+}
+
+button {
+  background-color: transparent;
+  border-width: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  padding: 10px 20px;
+  background-color: indianred;
+  color: white;
+}
+
+.layout {
+  background-color: #f8f7f7;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.widget {
+  display: grid;
+  place-items: center;
+}
+
+.welcome-message {
+  margin-bottom: 1rem;
+}
+
+.save-layout-button {
+  background-color: indigo;
+}
+
+.logout-button {
+  background-color: lightslategrey;
+}

@@ -1,27 +1,51 @@
+import { useState, useEffect, useRef } from 'react'
 import { Responsive, WidthProvider } from 'react-grid-layout'
+import PropTypes from 'prop-types'
 
 import { Widget } from './Widget'
 
 const RepsonsiveGridLayout = WidthProvider(Responsive)
 
-export const Grid = () => {
-  const layout = [
-    { i: 'a', x: 0, y: 0, w: 1, h: 2 },
-    { i: 'b', x: 1, y: 0, w: 3, h: 2 },
-    { i: 'c', x: 4, y: 0, w: 1, h: 2 }
-  ]
+const TILE_SIZE = 100
+
+export const Grid = ({ layout, setLayout }) => {
+  const [numOfCols, setNumOfCols] = useState(0)
+  const gridRef = useRef()
+
+  useEffect(() => {
+    const handleResize = () => {
+      const gridWidth = gridRef.current.elementRef.current.offsetWidth
+      const numberOfColumns = Math.floor(gridWidth / TILE_SIZE)
+      setNumOfCols(numberOfColumns)
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <RepsonsiveGridLayout
       className='layout'
+      compactType={null}
       layouts={{ lg: layout }}
       breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-      cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+      cols={{ lg: numOfCols ? numOfCols : 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
       rowHeight={100}
+      ref={gridRef}
+      onLayoutChange={(layout) => {
+        setLayout(layout)
+      }}
     >
-      <Widget key='a' style={{ backgroundColor: 'lightsalmon' }} />
-      <Widget key='b' style={{ backgroundColor: 'teal' }} />
-      <Widget key='c' style={{ backgroundColor: 'dodgerblue' }} />
+      <Widget className='widget' key='a' style={{ backgroundColor: 'lightsalmon' }} />
+      <Widget className='widget' key='b' style={{ backgroundColor: 'teal' }} />
+      <Widget className='widget' key='c' style={{ backgroundColor: 'dodgerblue' }} />
     </RepsonsiveGridLayout>
   )
+}
+
+Grid.propTypes = {
+  layout: PropTypes.string,
+  setLayout: PropTypes.func.isRequired
 }

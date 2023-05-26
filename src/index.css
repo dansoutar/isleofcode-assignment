@@ -39,3 +39,8 @@ body {
   height: 100%;
   font-family: sans-serif;
 }
+
+.h-stack {
+  display: flex;
+  gap: 0.5rem;
+}
